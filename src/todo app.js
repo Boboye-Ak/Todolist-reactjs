@@ -15,7 +15,8 @@ const Todo=()=>{
     const addItemHandler=(todoList)=>{
         
         
-        setList((oldTodoList)=>{
+        if (input){
+            setList((oldTodoList)=>{
             let newItem={id:todoList.length+1, name: input}
             let copy=[...oldTodoList]
             copy.push(newItem)
@@ -24,6 +25,9 @@ const Todo=()=>{
         })
 
         setInput("")
+
+        }
+        
     }
     const deleteEventHandler=(id)=>{
         let newList=todoList.filter((item)=>{
@@ -40,18 +44,18 @@ const Todo=()=>{
 
     const Todoitem=(props)=>{
     return <div>
-        <div className="container"><h3 className="">{props.item.name}</h3><button className="btn" onClick={()=>deleteEventHandler(props.item.id)}>Delete</button></div>
+        <div className="item"><h3 className="">{props.item.name}</h3><button className="btn" onClick={()=>deleteEventHandler(props.item.id)}>Delete</button></div>
     </div>
 }
 
     return(<React.Fragment>
         <section className="container">
             <div className="form">
-            <h2>TODO LIST APP</h2>
-            <input type="text" className="" onChange={(event)=>{setInput(event.target.value)}}></input>
+            <h2 className="page-header1">TODO LIST APP</h2>
+            <input type="text" className="" onChange={(event)=>{setInput(event.target.value)}} value={input}></input>
             <button className="btn" onClick={()=>addItemHandler(todoList)}>ADD</button>
             </div>
-            <div>{todoList.map((item)=>{
+            <div className="itembox">{todoList.map((item)=>{
                 return <Todoitem item={item} key={item.id}/>
                 
 
